@@ -1,0 +1,107 @@
+/* Here 'html' could be used to define these colour variables, however ':root' is more specific meaning it acts as a pseudo-class selector like ':hover'. This will also
+help avoid any conflicts, as prior to changing the selector to ':root' I had problems with the colouring of my background once a sound had been loaded. HSLA - hue, saturation,
+lightness and alpha (transparency) allows finer adjustments to colour to help match the 'Wave.' logo.*/
+:root {
+    --bgColor: rgb(129, 129, 129);
+    --bgColorLight: hsla(242, 86%, 24%, 1);
+    --textColor: hsla(242, 86%, 88%, 1);
+    --textColorDark: hsla(242, 36%, 0%, 1);
+    --paperColor: rgb(218, 218, 218);
+    --paperColorDark: rgb(185, 55, 94);
+    --shadowColorFaint: hsla(0, 0%, 0%, 0.2);
+}
+
+/* This is style for the container which the div container for the choose an audio file button is nested. Using vh will keep it the same size upon window re-sizing*/
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    background: var(--bgColor);
+    color: var(--textColor);
+    font-family: sans-serif;
+    position: relative;
+}
+
+* {
+    box-sizing: border-box;
+    transition: all 0.12s cubic-bezier(0.42, 0.54, 0.22, 1.26);
+}
+
+.logoimg {
+    width: 250px;
+    padding: 5%;
+}
+
+/* This centres the canvas in the centre of the web page */
+#canvas {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Refering to the audio controls, this positions the audio timeline at the bottom of the page, to make it responsive, the width is calculated with css property values
+by subtracting 20px from the full length of the controller (100%) makes it fit better at the bottom of the page - when the window is re-sized, this calculation is performed again
+to ensure it is centered */
+audio {
+    position: fixed;
+    left: 10px;
+    bottom: 5px;
+    width: calc(100% - 20px);
+}
+
+/*When an audio file is loaded, and the variable is active, this calls to reposition the audio controller again, to make sure it is uniform with the rest of the page, 
+as the audio controller is re-loaded with the time and volume of the chosen file. It just keeps it in the same position after the scene is loaded.*/
+audio.active {
+    bottom: 5px;
+}
+
+/* This section is dedicated to the 'choose an audio file' button, with the padding and transform properties to make the button bigger and fix it's position to the top left of the webpage. */
+#thefile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: 1;
+}
+
+/* This is css code to make the button look nice, centering it while it's not hovered, and changing your cursor so you know it afford interaction. */
+label.file {
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    padding: 2rem 2rem;
+    border-radius: 4px;
+
+    background: var(--paperColor);
+    color: rgb(41, 41, 41);
+    font-size: 1.25em;
+    font-weight: 700;
+    text-align: center;
+    box-shadow: 0 20px 60px var(--shadowColorFaint);
+
+    cursor: pointer;
+}
+
+/*On hover the button will be translated up and the colour will darken*/
+label.file:hover {
+    background: var(--paperColorDark);
+    transform: translate3d(-50%, -55%, 0);
+    color: var(--textColor);
+}
+
+/* This translates the button to the top left corner one a sound is loaded.*/
+label.file.normal {
+    transform: translate3d(10%, 50%, 0);
+    padding: 1rem 0.5rem;
+    font-size: 1rem;
+    top: 0;
+    left: 0;
+}
+

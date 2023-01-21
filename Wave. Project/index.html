@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Wave. - Visualise Audio</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="icon" type="image/x-icon" href="waveFavicon.png">
+<!--This plays a note when the user goes to upload an audio file, to let the user the script is working-->
+    <script src="http://unpkg.com/tone"></script>
+    <script>
+        function playNote() {
+            // Synth creation
+            const synth = new Tone.Synth().toDestination();
+            // Synth note creation to be played
+            synth.triggerAttackRelease("C5", "9n");
+        }
+    </script>
+
+</head>
+
+<body>
+    <!--Container for the controls and user interface, with an audio file upload button, and a timeline for the loaded sound, to play/pause and skip the music, and volume controls-->
+    <div id="content">
+
+        
+        
+
+        <label for="thefile" class="file">
+            <img class='logoimg' src="Wave. CC Ficticious Company.png" alt="logo">
+
+            </br>Choose an audio file <br>(must be an .mp3)<br> to watch the magic happen!
+            <input type="file" id="thefile" accept="audio/*" onclick="playNote()" />
+        </label>
+
+        <audio id="audio" controls></audio>
+        <div id="out"></div>
+    </div>
+    <!--Linking the three.js library to the index file, so three.js and tone.js can be used in the script document-->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/84/three.min.js'></script>
+    <script src='https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/controls/OrbitControls.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.3/dat.gui.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/simplex-noise/2.3.0/simplex-noise.min.js'></script>
+    <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
+
+
+    <!--Direct link to the script file for the html file to reference, therefore displaying the -->
+    <script src="./script.js"></script>
+
+</body>
+
+</html>
